@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PasswordManager</string>
+    <string name="action_settings">Settings</string>
+    <string name="enterMainPassword">Passwort eingeben</string>
+    <string name="btnLogin">App starten</string>
+    <string name="emptyList">Übersicht der Passwörter</string>
+   	<string name="textview_entry_passwordTitle">Passwort</string>
+  	<string name="dialog_wrongpassword">Sie haben ein falsches Passwort eingegeben! Versuchen Sie es noch einmal.</string>
+  	<string name="ok">Okay</string>
+  	<string name="cancel">Abbrechen</string>
+  	<string name="hints">Hinweis</string> 	
+  	<string name="textview_entry_new_title">Titel</string>
+  	<string name="textview_entry_new_password">Passwort</string>
+  	<string name="dialog_complete_input">Bitte Daten vervollständigen</string>
+  	<string name="set_mainpassword">Legen Sie hier ihr Masterpasswort an, dieses Passwort benötigen Sie um die App zu starten</string>
+  	<string name="textview_pw1">Passwort:</string>
+  	<string name="textview_pw2">Wiederholen Sie das Passwort:</string>
+  	<string name="button_masterpassword">Speichern</string>
+  	
+  	
+  	
+  	<!-- Titel -->
+  	<string name="viewEntry">Übersicht</string>
+  	<string name="createEntry">Neuer Eintrag</string>
+  	
+    <!-- Action buttons -->
+    <string name="txt_action_add">Hinzufügen</string>
+    <string name="txt_action_logout">Logout</string>
+    <string name="txt_action_search">Suche</string>
+    <string name="txt_action_save">Speichern</string>
+	<string name="txt_action_delete">Löschen</string>
+  	<string name="txt_action_send">Senden</string>
+  	
+</resources>

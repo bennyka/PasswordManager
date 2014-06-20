@@ -1,0 +1,17 @@
+
+    <resources>
+        <string-array name="login">
+            <item>Der Name1</item>
+            <item>Der Name2</item>
+            <item>Der Name3</item>
+            
+        </string-array>
+        
+        <string-array name="passwords">
+            <item>Das Password1</item>
+            <item>Das Password2</item>
+            <item>Das Password3</item>
+            
+        </string-array>
+        
+    </resources>
