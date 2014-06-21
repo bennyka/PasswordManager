@@ -14,40 +14,25 @@ import de.fh.passwordmanager.activites.ListsActivity;
 
 public class StartActivity extends Activity {
 	
-	private static final int STARTACTIVITY = 300;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		// laden der Preferences Klasse
-		MyPreferences MainPassword = new MyPreferences();
+		new MyPreferences();
 		
 		setContentView(R.layout.activity_main);
 		
-		// Überprüfung ob ein Masterpasswort gesetzt ist
-//		if (MainPassword.getMainPassword()){
+		//TODO Überprüfung ob ein Masterpasswort gesetzt ist
+		/*
+		 * Leider ist diese Funktionalität nicht mehr fertig geworden, das schreiben in die Preferences funktioniert nicht
+		 */
+//		if (MainPassword.mainPasswordExists()){
 //			setContentView(R.layout.activity_main);
 //		} else {
 //			Intent intent = new Intent(this, SetMasterPasswordActivity.class);
 //			startActivity(intent);
 //		}
 	}
-
-	
-	
-//	public void setMasterpassword(){
-//		Preferences root =
-//		  EncryptedPreferences.userNodeForPackage(
-//		    EncryptedTest.class, secretKey );
-//		 
-//		root.put( "transparent", "encryption" );
-//		 
-//		Preferences subnode = root.node( "subnode" );
-//		subnode.put( "also", "encrypted" );
-//		 
-//		root.exportSubtree( System.out );
-//	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,12 +57,11 @@ public class StartActivity extends Activity {
 						dialog.cancel();
 					}
 				  });
-				// Eine Instanz des AlertDialogs wird erstellt
-				AlertDialog alertDialog = alertDialogBuilder.create();
+				alertDialogBuilder.create();
 				
 		// Das MainPassword wird ausgelesen und in einen String umgewandelt
 		EditText passwordTextField = (EditText) findViewById(R.id.textfield_mainPassword);
-		String mainPassword = passwordTextField.getText().toString();
+		passwordTextField.getText().toString();
 		
 		// App Login: Das MainPassword wird mit dem in der App hinterlegten Passwort verglichen
 //		if (mainPassword.equals("ja")){

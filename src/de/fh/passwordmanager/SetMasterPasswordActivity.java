@@ -30,12 +30,16 @@ public class SetMasterPasswordActivity extends Activity{
 	}
 	
 	public void saveMasterPassword(View view){
+		// Laden der aktuellen Inhalte aus den textfeldern
 		String password_1 = passwordTextField_1.getText().toString();
 		String password_2 = passwordTextField_2.getText().toString();
-
+		
+		// Vergleichen der zwei Passwörter
 		if (password_1.equals(password_2)){
 			try {
+				// Aufruf der setMainPassword Methode, um das Passwort in den Preferences zu speichern
 				MyPreferences.setMainPassword(password_1);
+				// Beenden der Activity
 				finish();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

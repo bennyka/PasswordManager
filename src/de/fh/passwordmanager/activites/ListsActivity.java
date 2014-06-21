@@ -45,7 +45,7 @@ public class ListsActivity extends ListActivity {
 	}
 	
 	/*
-	 * Funktion zum Export der sqlite Datenbank
+	 * Funktion zum Export der sqlite Datenbank, TODO Leider funktioniert diese Funktion nicht, da der Mimetype falsch ist
 	 */
 	public void sendMail(){
 		Intent sendIntent = new Intent(Intent.ACTION_SEND);
@@ -94,27 +94,18 @@ public class ListsActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.entrylist_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
+	
+	
+	/*
+	 * Hier wird der Klick auf den Add Button abgefangen und eine Funktion beim Klick aufgerufen
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()){
 		case R.id.action_add:
 			createNewEntry();
 			return true;
-		case R.id.action_search:
-			
-			return true;
-			
-		case R.id.action_logout:
-			
-			return true;
-		case android.R.id.home:
-			finish();
-            return true;
-            
-		case R.id.action_send:
-			sendMail();
-		return true;
 		}
 		
 		return super.onOptionsItemSelected(item);

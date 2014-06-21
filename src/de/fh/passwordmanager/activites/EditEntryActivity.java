@@ -137,20 +137,18 @@ public class EditEntryActivity extends Activity {
 	 */
 	public void saveEntry(){
 		System.out.println("saveEntry fired!");
-		String newPW = edittext_password.getText().toString();
+		
+		// Auslesen der aktuellen Textfeldinhalte
+		newPassword = edittext_password.getText().toString();
 		newName = textview_title.getText().toString();
 		
-		newPassword = newPW;
-//		edittext_password.setText(newPassword);
-		
-		
-//		if (newPassword != entryPassword || newName != entryName){
+		if (newPassword != entryPassword || newName != entryName){
 			if (!newEntry){
 				updateEntry();
 			} else {
 				createNewEntry();
 			};
-//		}
+		}
 	}
 	
 	/*

@@ -5,22 +5,5 @@
         android:title="@string/txt_action_add"
     	android:icon="@android:drawable/ic_menu_add"
     	android:showAsAction="always"/>
-  
-    <item
-        android:id="@+id/action_send"
-        android:title="@string/txt_action_send"
-    	android:icon="@android:drawable/ic_menu_send"
-    	android:showAsAction="always"/>
-    
-     <item
-        android:id="@+id/action_search"
-        android:title="@string/txt_action_search"
-    	android:icon="@drawable/ic_menu_search_holo_dark"
-    	android:showAsAction="always"/>
-     
-     <item
-        android:id="@+id/action_logout"
-        android:title="@string/txt_action_logout"
-    	android:icon="@drawable/ic_menu_login"
-    	android:showAsAction="never"/> 
+ 
 </menu>
