@@ -1,5 +1,8 @@
 package de.fh.passwordmanager.activites;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import de.fh.passwordmanager.R;
 import de.fh.passwordmanager.dataHandler.DatabaseManager;
 import de.fh.passwordmanager.dataHandler.PasswordEntry;
@@ -17,8 +20,7 @@ import android.widget.ListView;
 
 public class ListsActivity extends ListActivity {
 	
-	private static final String DB_PATH = System.getProperty("user.home") + "/" + "database.db";
-	
+	DatabaseManager databaseManager = new DatabaseManager(this);
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,7 +36,7 @@ public class ListsActivity extends ListActivity {
 		setContentView(R.layout.activity_entrylist);
 
 		// Datenbank wird geladen
-		DatabaseManager databaseManager = new DatabaseManager(this);
+		
 		
 		// Eine Instanz des PasswordArrayAdapters wird erstellt
 		PasswordArrayAdapter adapter = new PasswordArrayAdapter(this, databaseManager.GetPasswords());
@@ -45,14 +47,23 @@ public class ListsActivity extends ListActivity {
 	}
 	
 	/*
-	 * Funktion zum Export der sqlite Datenbank, TODO Leider funktioniert diese Funktion nicht, da der Mimetype falsch ist
+	 * Funktion zum Export Einträge mit Name und Passwort
 	 */
 	public void sendMail(){
+		ArrayList<PasswordEntry> array = databaseManager.GetPasswords();
+		
+		String message = "";
+		// Die Arraylist wird in einer For Schleife durchlaufen und die Einträge in einen String gespeichert
+		for (int i = 0; i < array.size(); i++)
+		{
+			message = message +"Name: "+array.get(i).getName() + ", Passwort: " + array.get(i).getPassword() + "\r\n";
+		}
+		// Erstellen der Email
 		Intent sendIntent = new Intent(Intent.ACTION_SEND);
-		sendIntent.setType("application/x-sqlite");
+		sendIntent.setType("message/rfc822");
 		sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Export aus PasswordManager");
+		sendIntent.putExtra(Intent.EXTRA_TEXT, message);
 		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(DB_PATH));
 		startActivity(Intent.createChooser(sendIntent, "Send email..."));
 	}
 	
@@ -105,6 +116,9 @@ public class ListsActivity extends ListActivity {
 		switch (item.getItemId()){
 		case R.id.action_add:
 			createNewEntry();
+			return true;
+		case R.id.action_send:
+			sendMail();
 			return true;
 		}
 		

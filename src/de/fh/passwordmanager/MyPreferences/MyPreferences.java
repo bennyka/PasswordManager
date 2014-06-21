@@ -12,8 +12,9 @@ public class MyPreferences
 	static public void setMainPassword( String password ) throws Exception {
 		root = Preferences.userNodeForPackage(MyPreferences.class);
 	    root.put( "MainPassword", password);
-	    root.exportSubtree( System.out );
-	    System.out.println("password1: "+password);
+	    
+	    //root.exportSubtree( System.out );
+	    // System.out.println("password1: "+password);
 	}
 	
 	/*

@@ -95,9 +95,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
 			// Name wird in values hinzugefügt
 			values.put("NAME", name);
 			
-			// Passwort wird in values hinzugefügt
-//			values.put("PASSWORD", newPassword);
-			values.put("PASSWORD", encryptString(newPassword));// TODO Verschlüsselung wird nicht angewandt, da Entschlüsselung nicht funktioniert
+			// verschlüsseltes Passwort wird in values hinzugefügt
+			values.put("PASSWORD", encryptString(newPassword));
 			
 			// Name und Passwort werden der Datenbank hinzugefügt
 			db.insert("PASSWORD", null, values);
@@ -128,8 +127,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 			ContentValues values = new ContentValues();
 			
 			// Passwort wird in values hinzugefügt
-//			values.put("PASSWORD", newPassword);
-			values.put("PASSWORD", encryptString(newPassword));// TODO Verschlüsselung wird nicht angewandt, da Entschlüsselung nicht funktioniert
+			values.put("PASSWORD", encryptString(newPassword));
 			
 			// values wird dem Eintrag welcher mit dem übergebenen Namen übereinstimmt hinzugefügt
 			db.update("PASSWORD", values, "NAME = ?", new String[] { name });	
@@ -169,9 +167,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 					// auslesen des Namen eines Eintrages
 					String name = c.getString(0);
 					// auslesen des Passwortes eines Eintrages
-					String password = decryptString(c.getBlob(1)); //TODO Problem "last block incomplete in decription"
-//					String password = String.valueOf(c.getString(1));
-					//System.out.println("Datenbankausgabe: "+password+" / Blob: "+c.getBlob(1)+" / String: "+c.getString(1));
+					String password = decryptString(c.getBlob(1)); 
 					
 					//Name und Passwort werden einer Instanz eines Passwordentrys übergeben
 					passwords.add(new PasswordEntry(name, password));

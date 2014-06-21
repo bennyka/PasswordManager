@@ -26,6 +26,7 @@ public class StartActivity extends Activity {
 		/*
 		 * Leider ist diese Funktionalität nicht mehr fertig geworden, das schreiben in die Preferences funktioniert nicht
 		 */
+//		MyPreferences MainPassword = new MyPreferences();
 //		if (MainPassword.mainPasswordExists()){
 //			setContentView(R.layout.activity_main);
 //		} else {
