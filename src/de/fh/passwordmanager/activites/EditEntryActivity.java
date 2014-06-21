@@ -120,9 +120,6 @@ public class EditEntryActivity extends Activity {
 					dialog.cancel();
 					String newName= textview_title.getText().toString();
 					boolean success = databaseManager.DeletePassword(newName);
-					if (success){
-//						Toast.makeText(this,  "delete entry: "+newTitle, Toast.LENGTH_SHORT).show();
-					};
 					finish();
 				}
 			  });
@@ -135,9 +132,8 @@ public class EditEntryActivity extends Activity {
 	/*
 	 * Die saveEntry Funktion speichert den aktuell angezeigten Eintrag
 	 */
-	public void saveEntry(){
-		System.out.println("saveEntry fired!");
-		
+	public Boolean saveEntry(){
+		Boolean success = false;
 		// Auslesen der aktuellen Textfeldinhalte
 		newPassword = edittext_password.getText().toString();
 		newName = textview_title.getText().toString();
@@ -146,16 +142,17 @@ public class EditEntryActivity extends Activity {
 			if (!newEntry){
 				updateEntry();
 			} else {
-				createNewEntry();
+				// Gibt zurück ob die Speicherung erfolgreich war;
+				success = createNewEntry();
 			};
 		}
+		return success;
 	}
 	
 	/*
 	 * Die updateEntry Funktion updatet einen Datenbankeintrag
 	 */
 	public void updateEntry(){
-		System.out.println("updateEntry fired!");
 		boolean success = databaseManager.UpdatePassword(newName, newPassword);
 		if (success){
 			Toast.makeText(this,  "update entry: "+newPassword+" x "+newName, Toast.LENGTH_SHORT).show();
@@ -165,26 +162,28 @@ public class EditEntryActivity extends Activity {
 	/*
 	 *  Die createNewEntry Funktion dient der Speicherung von neuen Einträgen
 	 */
-	public void createNewEntry(){
-		System.out.println("createNewEntry fired!");
-		if (newPassword != null || newName != null){
+	public Boolean createNewEntry(){
+		Boolean success = false;
+		if (newPassword != null && newName != null && !newPassword.isEmpty() && !newName.isEmpty()){
 			// Titel und Passwort in DB schreiben
 			databaseManager.SavePassword(newName, newPassword);	
 			System.out.println("infos: "+newName+", "+newPassword);
 			Toast.makeText(this,  "create new entry", Toast.LENGTH_SHORT).show();
+			
+			success = true;
 		} else {
 			
 			// Ein AlterDialog wird erstellt
 			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 	 
 			// Titel des AlertDialog wird gesetzt
-			alertDialogBuilder.setTitle("@string/hint");
+			alertDialogBuilder.setTitle("Hinweis");
  
 			// Der MessageBody wird mit Text gefüllt
 			alertDialogBuilder
-				.setMessage("@string/dialog_complete_input")
+				.setMessage("Die eingegebenen Daten sind unvollständig. Bitte geben sein ein Passwort und einen Namen ein")
 				.setCancelable(false)
-				.setPositiveButton("@string/ok",new DialogInterface.OnClickListener() {
+				.setPositiveButton("Okay",new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog,int id) {
 						// Beim onClick wird der Dialog geschlossen
 						dialog.cancel();
@@ -195,6 +194,7 @@ public class EditEntryActivity extends Activity {
 			alertDialog.show();
 			
 		}
+		return success;
 	}
 	
 	/*
@@ -205,8 +205,11 @@ public class EditEntryActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()){
 		case R.id.action_save:
-			saveEntry();
-			finish();
+			Boolean success = saveEntry();
+			// Nur wenn die Speicherung erfolgreich war wird die Activity geschlossen
+			if (success == true){
+				finish();
+			};
 		return true;
 		
 		case R.id.action_delete:

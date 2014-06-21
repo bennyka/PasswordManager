@@ -45,8 +45,6 @@ public class Encryption {
             // Encrypt the text
             encryptedPassword = desCipher.doFinal(text);
             
-            System.out.println("verschlüsselter String: " + encryptedPassword );
-            
         }catch(NoSuchAlgorithmException e){
             e.printStackTrace();
         }catch(NoSuchPaddingException e){
@@ -85,23 +83,14 @@ public class Encryption {
 			// Decrypt the text
             try {
             	pw_field  = desCipher.doFinal(password);
-            	System.out.println("entschlüsselter String_1: " + pw_field );
             	for (int i = 0; i < pw_field.length; i++){
         			decryptedPassword += (char) pw_field[i];
             	}
-            	System.out.println("entschlüsselter String_2: " + decryptedPassword );
-//            	String result = new String(decryptedPassword.getBytes(),"UTF-8");
 			} catch (IllegalBlockSizeException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("Entschlüsselung fehlgeschlagen (Fehler 1): "+e);
 			} catch (BadPaddingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("Entschlüsselung fehlgeschlagen (Fehler 2): "+e);
 			}
-
-        	System.out.println("Entschlüsseltes Passwort final: "+decryptedPassword);
             
         }catch(NoSuchAlgorithmException e){
             e.printStackTrace();

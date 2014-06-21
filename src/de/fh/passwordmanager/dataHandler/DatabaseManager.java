@@ -141,7 +141,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
 		{
 			Log.d("DatabaseManager_SetMainPassword", e.toString());
 		}
-		System.out.println("Masterpasswort eingetragen: "+success);
 		return success;
 	}
 	
@@ -155,6 +154,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 			// Die Datenbank wird in schreibbaren Zustand geladen
 			SQLiteDatabase db = this.getWritableDatabase();
 			
+			// SQL Abfrage nach dem Eintrag mit dem Namen MAINPASSWORD
 			Cursor c = db.rawQuery("SELECT NAME, PASSWORD FROM PASSWORD WHERE NAME LIKE 'MAINPASSWORD'", new String[0]);
 			c.moveToFirst(); 
 			
@@ -178,6 +178,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 			// Die Datenbank wird in schreibbaren Zustand geladen
 			SQLiteDatabase db = this.getWritableDatabase();
 			
+			// SQL Abfrage nach dem Eintrag mit dem Namen MAINPASSWORD
 			Cursor c = db.rawQuery("SELECT NAME, PASSWORD FROM PASSWORD WHERE NAME LIKE 'MAINPASSWORD'", new String[0]);
 			c.moveToFirst();
 			mainPassword = decryptString(c.getBlob(1)); 
