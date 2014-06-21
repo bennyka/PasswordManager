@@ -75,7 +75,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 		}
 		catch(Exception e)
 		{
-			Log.d("DatabaseManager", "delete unsuccessfully");
+			Log.d("DatabaseManager_DeletePassword", e.toString());
 		}
 		
 		return success;
@@ -106,11 +106,91 @@ public class DatabaseManager extends SQLiteOpenHelper {
 		}
 		catch(Exception e)
 		{
-			Log.d("DatabaseManager", "save unsuccessfully");
+			Log.d("DatabaseManager_SavePassword", e.toString());
 		}
 		
 		return success;
 	}
+	/*
+	 * Diese Funktion trägt das MainPassword in die DB ein
+	 */
+	public boolean SetMainPassword(String newPassword){
+		
+		boolean success = false;
+		
+		try
+		{
+			// Die Datenbank wird in schreibbaren Zustand geladen
+			SQLiteDatabase db = this.getWritableDatabase();
+			
+			// Neue Instanz von values erstellen
+			ContentValues values = new ContentValues();
+			// Name wird in values hinzugefügt
+			values.put("NAME", "MAINPASSWORD");
+			
+			// verschlüsseltes Passwort wird in values hinzugefügt
+			values.put("PASSWORD", encryptString(newPassword));
+			
+			// Name und Passwort werden der Datenbank hinzugefügt
+			db.insert("PASSWORD", null, values);
+			db.close();
+			
+			success = true;
+		}
+		catch(Exception e)
+		{
+			Log.d("DatabaseManager_SetMainPassword", e.toString());
+		}
+		System.out.println("Masterpasswort eingetragen: "+success);
+		return success;
+	}
+	
+	/*
+	 * Diese Funktion prüft auf das vorhandensein des MainPasswords in der DB
+	 */
+	public Boolean ExistsMainPassword(){
+		boolean success = false;
+		try
+		{
+			// Die Datenbank wird in schreibbaren Zustand geladen
+			SQLiteDatabase db = this.getWritableDatabase();
+			
+			Cursor c = db.rawQuery("SELECT NAME, PASSWORD FROM PASSWORD WHERE NAME LIKE 'MAINPASSWORD'", new String[0]);
+			c.moveToFirst(); 
+			
+			success = true;
+		}
+		catch(Exception e)
+		{
+			Log.d("DatabaseManager_ExistsMainPassword", e.toString());
+		}
+		return success;
+	}
+	
+	/*
+	 * Diese Funktion liest das MainPassword aus
+	 */
+	public String GetMainPassword(){
+		String mainPassword = "";
+		
+		try
+		{
+			// Die Datenbank wird in schreibbaren Zustand geladen
+			SQLiteDatabase db = this.getWritableDatabase();
+			
+			Cursor c = db.rawQuery("SELECT NAME, PASSWORD FROM PASSWORD WHERE NAME LIKE 'MAINPASSWORD'", new String[0]);
+			c.moveToFirst();
+			mainPassword = decryptString(c.getBlob(1)); 
+			
+		}
+		catch(Exception e)
+		{
+			Log.d("DatabaseManager_GetMainPassword", e.toString());
+		}
+		
+		return mainPassword;
+	}
+	
 	/*
 	 * Diese Funktion dient zum Updaten eines Eintrages.
 	 * Lediglich das Passwort kann geupdatet werden.
@@ -137,7 +217,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 		}
 		catch(Exception e)
 		{
-			Log.d("DatabaseManager", "update unsuccessfully");
+			Log.d("DatabaseManager_UpdatePassword", e.toString());
 		}
 		
 		return success;
@@ -178,8 +258,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 		}
 		catch(Exception e)
 		{
-			Log.d("DatabaseManager", "read databse unsuccessfully");
-			Log.d("Databasemanager", e.toString());
+			Log.d("DatabaseManager_GetPasswords", e.toString());
 		}
 		
 		return passwords;

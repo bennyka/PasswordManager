@@ -4,35 +4,30 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import de.fh.passwordmanager.MyPreferences.MyPreferences;
 import de.fh.passwordmanager.activites.ListsActivity;
+import de.fh.passwordmanager.dataHandler.DatabaseManager;
 
 
 public class StartActivity extends Activity {
 	
+	// Datenbank laden
+	DatabaseManager databaseManager = new DatabaseManager(this);
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		new MyPreferences();
-		
-		setContentView(R.layout.activity_main);
-		
-		//TODO Überprüfung ob ein Masterpasswort gesetzt ist
-		/*
-		 * Leider ist diese Funktionalität nicht mehr fertig geworden, das schreiben in die Preferences funktioniert nicht
-		 */
-//		MyPreferences MainPassword = new MyPreferences();
-//		if (MainPassword.mainPasswordExists()){
-//			setContentView(R.layout.activity_main);
-//		} else {
-//			Intent intent = new Intent(this, SetMasterPasswordActivity.class);
-//			startActivity(intent);
-//		}
+		//Überprüfung ob ein Masterpasswort gesetzt ist
+		if (databaseManager.ExistsMainPassword() == true){
+			setContentView(R.layout.activity_main);
+			
+		} else {
+			Intent intent = new Intent(this, SetMasterPasswordActivity.class);
+			startActivity(intent);
+		}
 	}
 	
 	@Override
@@ -46,13 +41,13 @@ public class StartActivity extends Activity {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
  
 			// Titel des AlertDialog wird gesetzt
-			alertDialogBuilder.setTitle("@string/hint");
+			alertDialogBuilder.setTitle("Hinweis");
  
 			// Der MessageBody wird mit Text gefüllt
 			alertDialogBuilder
-				.setMessage("@string/dialog_wrongPassword")
+				.setMessage("Sie haben ein falsches Passwort eingegeben. Bitte versuchen Sie es erneut.")
 				.setCancelable(false)
-				.setPositiveButton("@string/ok",new DialogInterface.OnClickListener() {
+				.setPositiveButton("Okay",new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog,int id) {
 						// Beim onClick wird der Dialog geschlossen
 						dialog.cancel();
@@ -64,13 +59,14 @@ public class StartActivity extends Activity {
 		EditText passwordTextField = (EditText) findViewById(R.id.textfield_mainPassword);
 		passwordTextField.getText().toString();
 		
+		TextView masterPassword = (TextView)findViewById(R.id.textfield_mainPassword);
 		// App Login: Das MainPassword wird mit dem in der App hinterlegten Passwort verglichen
-//		if (mainPassword.equals("ja")){
+		if (masterPassword.getText().toString().equals(databaseManager.GetMainPassword())){
 			Intent intent = new Intent(this, ListsActivity.class);
 			startActivity(intent);
-//		} else {
-//			// Der oben erstellte AlertDialog wird angezeigt, wenn das falsche Passwort eingegeben wurde
-//			alertDialog.show();
-//		};
+		} else {
+			// Der oben erstellte AlertDialog wird angezeigt, wenn das falsche Passwort eingegeben wurde
+			alertDialogBuilder.show();
+		};
 	}
 }

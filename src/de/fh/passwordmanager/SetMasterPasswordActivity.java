@@ -1,18 +1,19 @@
 package de.fh.passwordmanager;
 
-import de.fh.passwordmanager.MyPreferences.MyPreferences;
+import de.fh.passwordmanager.dataHandler.DatabaseManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 public class SetMasterPasswordActivity extends Activity{
 	
-//	// Laden der Preferences Klasse
-	MyPreferences MainPassword = new MyPreferences();
-	
+	// Datenbank laden
+	DatabaseManager databaseManager = new DatabaseManager(this);
+		
 	// Deklarieren der Textfelder
 	EditText passwordTextField_1;
 	EditText passwordTextField_2;
@@ -30,21 +31,21 @@ public class SetMasterPasswordActivity extends Activity{
 	}
 	
 	public void saveMasterPassword(View view){
+		
 		// Laden der aktuellen Inhalte aus den textfeldern
 		String password_1 = passwordTextField_1.getText().toString();
 		String password_2 = passwordTextField_2.getText().toString();
 		
 		// Vergleichen der zwei Passwörter
 		if (password_1.equals(password_2)){
-			try {
-				// Aufruf der setMainPassword Methode, um das Passwort in den Preferences zu speichern
-				MyPreferences.setMainPassword(password_1);
-				// Beenden der Activity
-				finish();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+			// Aufruf der setMainPassword Methode, um das Passwort in den Preferences zu speichern
+			databaseManager.SetMainPassword(password_1);
+			
+			// weiter zur StartActivity
+			Intent intent = new Intent(this, StartActivity.class);
+			startActivity(intent);
+			
 		} else {
 			// Ein AlterDialog wird erstellt
 			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
