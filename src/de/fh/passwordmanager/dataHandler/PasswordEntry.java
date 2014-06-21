@@ -1,5 +1,8 @@
 package de.fh.passwordmanager.dataHandler;
 
+/*
+ * Diese Funktion dient zur Verwaltung der Datenbankeinträge
+ */
 public class PasswordEntry 
 {
 	private String name;

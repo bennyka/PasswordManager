@@ -3,5 +3,7 @@ encoding//src/de/fh/passwordmanager/SetMasterPasswordActivity.java=UTF-8
 encoding//src/de/fh/passwordmanager/StartActivity.java=UTF-8
 encoding//src/de/fh/passwordmanager/activites/EditEntryActivity.java=UTF-8
 encoding//src/de/fh/passwordmanager/activites/ListsActivity.java=UTF-8
+encoding//src/de/fh/passwordmanager/activites/PasswordArrayAdapter.java=UTF-8
 encoding//src/de/fh/passwordmanager/dataHandler/DatabaseManager.java=UTF-8
+encoding//src/de/fh/passwordmanager/dataHandler/PasswordEntry.java=UTF-8
 encoding//src/de/fh/passwordmanager/encryption/Encryption.java=UTF-8

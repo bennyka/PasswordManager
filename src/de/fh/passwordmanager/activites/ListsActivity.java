@@ -1,6 +1,5 @@
 package de.fh.passwordmanager.activites;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import de.fh.passwordmanager.R;
@@ -9,15 +8,15 @@ import de.fh.passwordmanager.dataHandler.PasswordEntry;
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+/*
+ * Diese Klasse dient der Anzeige der in der DB gespeicherten Passwörter
+ */
 public class ListsActivity extends ListActivity {
 	
 	DatabaseManager databaseManager = new DatabaseManager(this);
@@ -124,19 +123,4 @@ public class ListsActivity extends ListActivity {
 		
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		// TODO Auto-generated method stub
-		super.onCreateContextMenu(menu, v, menuInfo);
-	}
-
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-		return super.onContextItemSelected(item);
-	}
-	
 }

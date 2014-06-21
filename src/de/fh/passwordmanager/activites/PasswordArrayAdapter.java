@@ -11,7 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
-
+/*
+ * Diese Klasse dient der Erstellung eines Array Adapters, zum Anzeigen der DB Einträge
+ */
 public class PasswordArrayAdapter extends ArrayAdapter<PasswordEntry>
 {
 	private ArrayList<PasswordEntry> _passwords = null;

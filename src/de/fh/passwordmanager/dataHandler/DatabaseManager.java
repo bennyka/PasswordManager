@@ -9,7 +9,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
+/*
+ * Diese Klasse dient zur Verwaltung der Datenbank
+ */
 public class DatabaseManager extends SQLiteOpenHelper {
 	
 	// Verschlüsselung wird geladen
@@ -80,7 +82,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
 		
 		return success;
 	}
-	
+	/*
+	 * Diese Funktion speichert neue Einträge in der DB
+	 */
 	public boolean SavePassword(String name, String newPassword){
 		
 		boolean success = false;
@@ -264,7 +268,5 @@ public class DatabaseManager extends SQLiteOpenHelper {
 		
 		return passwords;
 	}
-	
-	
 	
 }

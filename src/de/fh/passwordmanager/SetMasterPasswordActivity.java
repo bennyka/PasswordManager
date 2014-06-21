@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-
+/*
+ * Diese Klasse dient zur Überprüfung und Festlegung des Masterpasswortes
+ */
 public class SetMasterPasswordActivity extends Activity{
 	
 	// Datenbank laden
@@ -29,7 +31,9 @@ public class SetMasterPasswordActivity extends Activity{
 		
 		super.onCreate(savedInstanceState);
 	}
-	
+	/*
+	 * Die eingegebenen Passwörter werden auf Übereinstimmung geprüft und mit der SetMainPassword Funktion in die DB gespeichert
+	 */
 	public void saveMasterPassword(View view){
 		
 		// Laden der aktuellen Inhalte aus den textfeldern

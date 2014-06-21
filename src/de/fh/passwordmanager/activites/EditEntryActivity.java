@@ -15,7 +15,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/*
+ * Diese Klasse dient zur Bearbeitung eines Eintrages
+ */
 public class EditEntryActivity extends Activity {
 	
 	// Initiieren von globalen Variablen
@@ -28,6 +30,7 @@ public class EditEntryActivity extends Activity {
 	boolean newEntry = true;
 	byte[] encryptPassword;
 	byte[] decryptedPassword;
+	
 	// Initiieren von globalen Objekten (TextView und Edittext)
 	TextView textview_title;
 	EditText edittext_password;
@@ -35,13 +38,10 @@ public class EditEntryActivity extends Activity {
 	// Datenbank laden
 	DatabaseManager databaseManager = new DatabaseManager(this);
 	
-	
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
-		// set title of actionBar
+		// Titel der ActionBar festlegen
 		getActionBar().setTitle("Eintrag bearbeiten");
 		
 		// Der EntryActivity wird ein Layout zugewiesen
@@ -119,7 +119,7 @@ public class EditEntryActivity extends Activity {
 					// Beim onClick wird der Eintrag gelöscht
 					dialog.cancel();
 					String newName= textview_title.getText().toString();
-					boolean success = databaseManager.DeletePassword(newName);
+					databaseManager.DeletePassword(newName);
 					finish();
 				}
 			  });
@@ -130,7 +130,7 @@ public class EditEntryActivity extends Activity {
 	}
 
 	/*
-	 * Die saveEntry Funktion speichert den aktuell angezeigten Eintrag
+	 * Die saveEntry Funktion speichert den aktuell angezeigten Eintrag in der Datenbank
 	 */
 	public Boolean saveEntry(){
 		Boolean success = false;

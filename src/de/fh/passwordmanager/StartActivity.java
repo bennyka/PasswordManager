@@ -3,7 +3,6 @@ package de.fh.passwordmanager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,7 +11,10 @@ import android.content.Intent;
 import de.fh.passwordmanager.activites.ListsActivity;
 import de.fh.passwordmanager.dataHandler.DatabaseManager;
 
-
+/*
+ * Diese Klasse dient zur Eingabe und Überprüfung des Masterpasswortes
+ * Es ist die Startactivity und bildet den "Eingang" in die App
+ */
 public class StartActivity extends Activity {
 	
 	// Datenbank laden
@@ -34,7 +36,9 @@ public class StartActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    return super.onCreateOptionsMenu(menu);
 	}
-	
+	/*
+	 * Diese Funktion prüft das eingegebene Passwort und gleicht es mit dem gespeicherten Passwort ab
+	 */
 	public void startApp(View view){
 		
 		// Ein AlterDialog wird erstellt
@@ -56,9 +60,6 @@ public class StartActivity extends Activity {
 				alertDialogBuilder.create();
 				
 		// Das MainPassword wird ausgelesen und in einen String umgewandelt
-		EditText passwordTextField = (EditText) findViewById(R.id.textfield_mainPassword);
-		passwordTextField.getText().toString();
-		
 		TextView masterPassword = (TextView)findViewById(R.id.textfield_mainPassword);
 		// App Login: Das MainPassword wird mit dem in der App hinterlegten Passwort verglichen
 		if (masterPassword.getText().toString().equals(databaseManager.GetMainPassword())){

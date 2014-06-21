@@ -16,7 +16,7 @@ public class Encryption {
 	
 	/*
 	 * Erstellen eines initialen 16bit Passwortes zur Verschlüsselung und Entschlüsselung
-	 * 16 Werte zwischen 0, 255
+	 * 8 Werte zwischen 0, 255
 	 */
 	private final byte[] _internalPassword = new byte[] { 20, 10, 66, 66, 77, 88, 99, 98 }; 
 	
